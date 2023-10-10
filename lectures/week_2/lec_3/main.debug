@@ -1,0 +1,79 @@
+
+main.o:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00000000 <dummy>:
+#include "stdio.h"
+
+int glb=55;
+const int glb2 = 66;
+
+int dummy(){
+   0:	f3 0f 1e fb          	endbr32 
+   4:	55                   	push   %ebp
+   5:	89 e5                	mov    %esp,%ebp
+   7:	83 ec 10             	sub    $0x10,%esp
+   a:	e8 fc ff ff ff       	call   b <dummy+0xb>
+   f:	05 01 00 00 00       	add    $0x1,%eax
+	int i;
+	i=i+5;
+  14:	83 45 fc 05          	addl   $0x5,-0x4(%ebp)
+}
+  18:	90                   	nop
+  19:	c9                   	leave  
+  1a:	c3                   	ret    
+
+0000001b <main>:
+int main(){
+  1b:	f3 0f 1e fb          	endbr32 
+  1f:	8d 4c 24 04          	lea    0x4(%esp),%ecx
+  23:	83 e4 f0             	and    $0xfffffff0,%esp
+  26:	ff 71 fc             	pushl  -0x4(%ecx)
+  29:	55                   	push   %ebp
+  2a:	89 e5                	mov    %esp,%ebp
+  2c:	53                   	push   %ebx
+  2d:	51                   	push   %ecx
+  2e:	83 ec 10             	sub    $0x10,%esp
+  31:	e8 fc ff ff ff       	call   32 <main+0x17>
+  36:	81 c3 02 00 00 00    	add    $0x2,%ebx
+	int a = 1;
+  3c:	c7 45 f4 01 00 00 00 	movl   $0x1,-0xc(%ebp)
+	a = a+2;
+  43:	83 45 f4 02          	addl   $0x2,-0xc(%ebp)
+	
+	printf("\nIn function main 1\n");
+  47:	83 ec 0c             	sub    $0xc,%esp
+  4a:	8d 83 04 00 00 00    	lea    0x4(%ebx),%eax
+  50:	50                   	push   %eax
+  51:	e8 fc ff ff ff       	call   52 <main+0x37>
+  56:	83 c4 10             	add    $0x10,%esp
+	// fun1();
+	printf("\nIn function main 2\n");
+  59:	83 ec 0c             	sub    $0xc,%esp
+  5c:	8d 83 18 00 00 00    	lea    0x18(%ebx),%eax
+  62:	50                   	push   %eax
+  63:	e8 fc ff ff ff       	call   64 <main+0x49>
+  68:	83 c4 10             	add    $0x10,%esp
+  6b:	b8 00 00 00 00       	mov    $0x0,%eax
+	// fun2();	
+}
+  70:	8d 65 f8             	lea    -0x8(%ebp),%esp
+  73:	59                   	pop    %ecx
+  74:	5b                   	pop    %ebx
+  75:	5d                   	pop    %ebp
+  76:	8d 61 fc             	lea    -0x4(%ecx),%esp
+  79:	c3                   	ret    
+
+Disassembly of section .text.__x86.get_pc_thunk.ax:
+
+00000000 <__x86.get_pc_thunk.ax>:
+   0:	8b 04 24             	mov    (%esp),%eax
+   3:	c3                   	ret    
+
+Disassembly of section .text.__x86.get_pc_thunk.bx:
+
+00000000 <__x86.get_pc_thunk.bx>:
+   0:	8b 1c 24             	mov    (%esp),%ebx
+   3:	c3                   	ret    
